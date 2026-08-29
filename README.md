@@ -1,229 +1,64 @@
-HEAD
-# Enterprise Network Design Lab
+# Enterprise Network & Security Lab
 
-A small enterprise network built and verified in Cisco Packet Tracer, covering VLAN segmentation, inter-VLAN routing, centralized DHCP/DNS, and secure remote management. Built as a hands-on lab to practice enterprise network design and configuration.
+A Cisco Packet Tracer project simulating a small enterprise network — built to demonstrate practical skills in network segmentation, routing, security controls, network services, and centralized monitoring.
 
-## Topology
-                     R1-EDGE
-                        |
-                   SW1-CORE
-                 /     |      \
-                /      |       \
-           VLAN 10  VLAN 20   VLAN 30
-            STAFF      IT     SERVERS
-              |         |        |
-            PCs       PCs    DNS + WEB
-              \         |        /
-               \________|_______/
-                     |
-                DHCP + DNS
+## Overview
 
-## Progress
+This project models a small enterprise environment with multiple departments, a dedicated server segment, layered security controls, centralized monitoring, and Internet connectivity via a simulated ISP. It reflects a realistic design workflow: segmenting traffic by function, securing access at every layer, and validating the result through structured testing.
 
-| Phase                | Status |
-|-----------------------|--------|
-| VLANs                 | ✅ |
-| Trunking               | ✅ |
-| Inter-VLAN Routing     | ✅ |
-| DHCP                   | ✅ |
-| DNS                    | ✅ |
-| Web Server             | ✅ |
-| DNS Resolution         | ✅ |
-| SSH Management         | ⬜ |
-| ACL Security           | ⬜ |
-| OSPF                   | ⬜ |
-| STP                    | ⬜ |
-| EtherChannel           | ⬜ |
-| Port Security          | ⬜ |
-| Firewall               | ⬜ |
-| Monitoring             | ⬜ |
-| Wireshark              | ⬜ |
-| Security Testing       | ⬜ |
+## Technologies Used
 
-## Documentation
+`Cisco Packet Tracer` · `VLAN` · `Inter-VLAN Routing` · `OSPF` · `DHCP` · `DNS` · `HTTP/Web Server` · `NAT/PAT` · `ACL` · `Port Security` · `STP` · `EtherChannel` · `SSH` · `Syslog` · `NTP`
 
-- [Network Design](docs/01-network-design.md) — topology, VLAN table, IP addressing scheme
-- [Phase Log](docs/02-phase-log.md) — detailed build log per phase, with config, verification, and notes
-- [Screenshots](docs/screenshots/) — numbered evidence for each build step
+## Network Segmentation
 
-## Tools
-- Cisco Packet Tracer
+| VLAN | Purpose    | Network          |
+|------|------------|------------------|
+| 10   | Staff      | 192.168.10.0/24  |
+| 20   | IT         | 192.168.20.0/24  |
+| 30   | Servers    | 192.168.30.0/24  |
+| 99   | Management | 192.168.99.0/24  |
 
-## Author
-Pawan Sirimanna — [slapy2-0](https://github.com/slapy2-0)
+## Security Features
 
-# \# Enterprise Network \& Security Lab
+- VLAN-based network segmentation
+- Access Control Lists (ACLs) restricting inter-VLAN traffic
+- Port Security on access-layer switches
+- SSH-only device management
+- Dedicated management VLAN, isolated from user traffic
+- NAT/PAT for controlled outbound Internet access
 
-# 
+## Network Services
 
-# A Cisco Packet Tracer enterprise network designed and implemented
+- **DHCP** — automated IP addressing per VLAN
+- **DNS** — internal name resolution
+- **Web Server** — hosted HTTP service
+- **Syslog** — centralized event logging
+- **NTP** — synchronized device time
 
-# to demonstrate networking, security, routing, network services,
+## Routing
 
-# and monitoring concepts.
+OSPF runs between the Layer 3 core switch and the edge router, providing dynamic internal routing. A default route from the edge router provides outbound connectivity toward the simulated ISP.
 
-# 
+## Monitoring
 
-# \## Project Overview
+A centralized NMS (Network Management Server) aggregates:
+- Syslog messages from network devices
+- NTP synchronization across the topology
 
-# 
+## Testing
 
-# This project simulates a small enterprise network with multiple
+The network was validated against the following criteria:
 
-# departments, servers, network security controls, centralized
+- [x] Inter-VLAN connectivity
+- [x] ACL enforcement
+- [x] Server accessibility
+- [x] Internet connectivity via NAT
+- [x] OSPF adjacency and route propagation
+- [x] Port Security violation handling
+- [x] Syslog message delivery
+- [x] NTP synchronization
 
-# monitoring, and Internet connectivity.
+## Project Status
 
-# 
-
-# \## Technologies Used
-
-# 
-
-# \- Cisco Packet Tracer
-
-# \- VLAN
-
-# \- Inter-VLAN Routing
-
-# \- OSPF
-
-# \- DHCP
-
-# \- DNS
-
-# \- HTTP/Web Server
-
-# \- NAT/PAT
-
-# \- ACL
-
-# \- Port Security
-
-# \- STP
-
-# \- EtherChannel
-
-# \- SSH
-
-# \- Syslog
-
-# \- NTP
-
-# 
-
-# \## Network Segmentation
-
-# 
-
-# | VLAN | Purpose | Network |
-
-# |------|---------|---------|
-
-# | 10 | STAFF | 192.168.10.0/24 |
-
-# | 20 | IT | 192.168.20.0/24 |
-
-# | 30 | SERVERS | 192.168.30.0/24 |
-
-# | 99 | MANAGEMENT | 192.168.99.0/24 |
-
-# 
-
-# \## Security Features
-
-# 
-
-# \- VLAN-based network segmentation
-
-# \- Access Control Lists
-
-# \- Port Security
-
-# \- SSH management
-
-# \- Restricted inter-VLAN communication
-
-# \- NAT/PAT
-
-# \- Dedicated management VLAN
-
-# 
-
-# \## Network Services
-
-# 
-
-# \- DHCP
-
-# \- DNS
-
-# \- Web Server
-
-# \- Syslog
-
-# \- NTP
-
-# 
-
-# \## Routing
-
-# 
-
-# OSPF is used between the Layer 3 core switch and the edge router.
-
-# 
-
-# A default route provides connectivity toward the simulated ISP.
-
-# 
-
-# \## Monitoring
-
-# 
-
-# A centralized NMS server is used for:
-
-# 
-
-# \- Syslog collection
-
-# \- NTP synchronization
-
-# 
-
-# \## Testing
-
-# 
-
-# The network was tested for:
-
-# 
-
-# \- Inter-VLAN connectivity
-
-# \- ACL restrictions
-
-# \- Server accessibility
-
-# \- Internet connectivity
-
-# \- NAT translation
-
-# \- OSPF adjacency
-
-# \- Port Security
-
-# \- Syslog
-
-# \- NTP synchronization
-
-# 
-
-# \## Project Status
-
-# 
-
-# Completed
-
- 266c731 (Initial enterprise network lab)
+**Completed** ✅
