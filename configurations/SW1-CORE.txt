@@ -1,6 +1,6 @@
 Building configuration...
 
-Current configuration : 3638 bytes
+Current configuration : 4139 bytes
 !
 version 12.2(37)SE1
 service timestamps log datetime msec
@@ -15,19 +15,7 @@ no profinet
 enable secret 5 $1$mERr$Wx2RHVgisVC31nsb1RHhd.
 !
 !
-ip dhcp excluded-address 192.168.10.1 192.168.10.20
-ip dhcp excluded-address 192.168.20.1 192.168.20.20
 !
-ip dhcp pool STAFF
- network 192.168.10.0 255.255.255.0
- default-router 192.168.10.1
- dns-server 192.168.30.10
- domain-name enterprise.local
-ip dhcp pool IT
- network 192.168.20.0 255.255.255.0
- default-router 192.168.20.1
- dns-server 192.168.30.10
- domain-name enterprise.local
 !
 !
 ip routing
@@ -58,17 +46,31 @@ spanning-tree vlan 10,20,30,99,999 priority 24576
 !
 !
 !
+interface Port-channel1
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,99,999
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface Port-channel2
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,99,999
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
 interface FastEthernet0/1
  switchport trunk native vlan 999
  switchport trunk allowed vlan 10,20,30,99,999
  switchport trunk encapsulation dot1q
  switchport mode trunk
+ channel-group 1 mode active
 !
 interface FastEthernet0/2
  switchport trunk native vlan 999
  switchport trunk allowed vlan 10,20,30,99,999
  switchport trunk encapsulation dot1q
  switchport mode trunk
+ channel-group 2 mode active
 !
 interface FastEthernet0/3
  description DNS-SERVER
@@ -85,8 +87,18 @@ interface FastEthernet0/5
  switchport mode access
 !
 interface FastEthernet0/6
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,99,999
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 1 mode active
 !
 interface FastEthernet0/7
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,99,999
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ channel-group 2 mode active
 !
 interface FastEthernet0/8
 !
@@ -138,11 +150,13 @@ interface Vlan10
  description STAFF_NETWORK
  mac-address 00d0.ffda.e601
  ip address 192.168.10.1 255.255.255.0
+ ip helper-address 192.168.30.10
  ip access-group STAFF-SECURITY in
 !
 interface Vlan20
  mac-address 00d0.ffda.e602
  ip address 192.168.20.1 255.255.255.0
+ ip helper-address 192.168.30.10
 !
 interface Vlan30
  mac-address 00d0.ffda.e603
@@ -167,18 +181,20 @@ ip route 0.0.0.0 0.0.0.0 10.0.0.1
 ip flow-export version 9
 !
 !
-ip access-list extended STAFF-SECURITY
- deny ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
- deny ip 192.168.10.0 0.0.0.255 192.168.99.0 0.0.0.255
- permit ip 192.168.10.0 0.0.0.255 192.168.30.0 0.0.0.255
- permit ip 192.168.10.0 0.0.0.255 any
 ip access-list extended sl_def_acl
  deny tcp any any eq telnet
  deny tcp any any eq www
  deny tcp any any eq 22
  permit tcp any any eq 22
+ip access-list extended STAFF-SECURITY
+ permit udp any eq bootpc any eq bootps
+ permit udp any eq bootps any eq bootpc
+ deny ip 192.168.10.0 0.0.0.255 192.168.20.0 0.0.0.255
+ deny ip 192.168.10.0 0.0.0.255 192.168.99.0 0.0.0.255
+ permit ip 192.168.10.0 0.0.0.255 192.168.30.0 0.0.0.255
+ permit ip 192.168.10.0 0.0.0.255 any
 !
-banner motd ^CAUTHORIZED ACCESS ONLY - Enterprise Network Security Lab^C
+banner motd ^CAUTHORIZED ACCESS ONLY - Enterprise Network Security Lab^
 !
 !
 !
