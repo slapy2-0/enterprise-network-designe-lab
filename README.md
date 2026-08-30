@@ -2,7 +2,7 @@
 
 A Cisco Packet Tracer project simulating a small enterprise network — built to demonstrate practical skills in network segmentation, routing, security controls, network services, and centralized monitoring.
 
-![Network Topology](Topology/enterprise-network-topology.png)
+![Network Topology](Topology/enterprise-network-topology.drawio.drawio.png)
 
 ## Overview
 
