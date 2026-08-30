@@ -21,6 +21,18 @@ This project models a small enterprise environment with multiple departments, a 
 | 30   | Servers    | 192.168.30.0/24  |
 | 99   | Management | 192.168.99.0/24  |
 
+## Network Architecture
+
+| Device | Role |
+|---|---|
+| SW1-CORE | Layer 3 Core Switch |
+| SW2-ACCESS | Staff Access Switch |
+| SW3-ACCESS | IT Access Switch |
+| R1-EDGE | Internet Edge Router |
+| DNS-SERVER | DNS / DHCP Server |
+| WEB-SERVER | Internal Web Server |
+| NMS-SERVER | Syslog / NTP |
+
 ## Security Features
 
 - VLAN-based network segmentation
