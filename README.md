@@ -2,6 +2,8 @@
 
 A Cisco Packet Tracer project simulating a small enterprise network — built to demonstrate practical skills in network segmentation, routing, security controls, network services, and centralized monitoring.
 
+![Network Topology](Topology/enterprise-network-topology.png)
+
 ## Overview
 
 This project models a small enterprise environment with multiple departments, a dedicated server segment, layered security controls, centralized monitoring, and Internet connectivity via a simulated ISP. It reflects a realistic design workflow: segmenting traffic by function, securing access at every layer, and validating the result through structured testing.
