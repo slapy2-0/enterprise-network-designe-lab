@@ -1,6 +1,6 @@
 Building configuration...
 
-Current configuration : 2507 bytes
+Current configuration : 2403 bytes
 !
 version 15.0
 service timestamps log datetime msec
@@ -32,6 +32,7 @@ interface FastEthernet0/1
  switchport trunk native vlan 999
  switchport trunk allowed vlan 10,20,30,99,999
  switchport mode trunk
+ channel-group 1 mode active
 !
 interface FastEthernet0/2
  description IT-PCs
@@ -52,6 +53,10 @@ interface FastEthernet0/3
  switchport port-security mac-address sticky 0060.3EA9.E440
 !
 interface FastEthernet0/4
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,99,999
+ switchport mode trunk
+ channel-group 1 mode active
 !
 interface FastEthernet0/5
 !
@@ -94,16 +99,8 @@ interface FastEthernet0/23
 interface FastEthernet0/24
 !
 interface GigabitEthernet0/1
- switchport trunk native vlan 999
- switchport trunk allowed vlan 10,20,30,99,999
- switchport mode trunk
- channel-group 1 mode active
 !
 interface GigabitEthernet0/2
- switchport trunk native vlan 999
- switchport trunk allowed vlan 10,20,30,99,999
- switchport mode trunk
- channel-group 1 mode active
 !
 interface Vlan1
  no ip address
